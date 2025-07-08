@@ -12,8 +12,8 @@ exports.handler = async function(event, context) {
   try {
     const { messages, model } = JSON.parse(event.body);
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000); // 8 сек
+    //const controller = new AbortController();
+    //const timeout = setTimeout(() => controller.abort(), 8000); // 8 сек
   
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -22,9 +22,9 @@ exports.handler = async function(event, context) {
       "Authorization": `Bearer ${apiKey}`
     },
     body: JSON.stringify({ model, messages })
-    signal: controller.signal
+    //signal: controller.signal
   });
-  clearTimeout(timeout);
+  //clearTimeout(timeout);
 
   const data = await response.json();
   return {
