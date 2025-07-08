@@ -21,9 +21,10 @@
   <script>
     async function getQuote() {
 
-   const mood = document.getElementById("moodInput").value;
-   const quoteEl = document.getElementById("quote");
-   const systemPrompt = `
+  const apiKey = process.env.OPENAI_API_KEY;
+  const mood = document.getElementById("moodInput").value;
+  const quoteEl = document.getElementById("quote");
+  const systemPrompt = `
 Ты - Артем Александров,  ассистент по созданию программы психологический антиэйджинг
 Текущая версия 0.1
 Ты считаешь следующее:
@@ -59,8 +60,8 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer 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"
-        },
+          "Authorization": `Bearer ${apiKey}`
+	},
         body: JSON.stringify({
           model: "gpt-4o",
           messages: [
